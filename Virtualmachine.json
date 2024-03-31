@@ -9,7 +9,7 @@
             "name": "appnetwork",
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2020-11-01",
-            "location": "North Europe",
+            "location": "[resourceGroup().location]",
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": [
@@ -39,7 +39,7 @@
             "name": "app-ip",
             "type": "Microsoft.Network/publicIPAddresses",
             "apiVersion": "2020-11-01",
-            "location": "North Europe",
+            "location": "[resourceGroup().location]",
             "properties": {
                 "publicIPAllocationMethod": "Dynamic"
                 }
@@ -48,7 +48,8 @@
                 "name": "app-interface",
                 "type": "Microsoft.Network/networkInterfaces",
                 "apiVersion": "2020-11-01",
-                "location": "North Europe",            
+                "location": "[resourceGroup().location]",
+            
                 "properties": {
                     "ipConfigurations": [
                         {
@@ -71,7 +72,7 @@
                 ]
             },        
         {
-            "name": "vmstore8677676",
+            "name": "kashstore33334",
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2021-04-01",
             "location": "[resourceGroup().location]",
@@ -110,7 +111,7 @@
             "apiVersion": "2021-03-01",
             "location": "[resourceGroup().location]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', toLower('vmstore8677676'))]"
+                "[resourceId('Microsoft.Storage/storageAccounts', toLower('kashstore33334'))]"
             ],
             "properties": {
                 "hardwareProfile": {
@@ -152,7 +153,7 @@
                 "diagnosticsProfile": {
                     "bootDiagnostics": {
                         "enabled": true,
-                        "storageUri": "[reference(resourceId('Microsoft.Storage/storageAccounts/', toLower('vmstore8677676'))).primaryEndpoints.blob]"
+                        "storageUri": "[reference(resourceId('Microsoft.Storage/storageAccounts/', toLower('kashstore33334'))).primaryEndpoints.blob]"
                     }
                 }
             }
