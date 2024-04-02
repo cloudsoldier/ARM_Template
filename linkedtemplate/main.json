@@ -1,1 +1,56 @@
-
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {},
+    "functions": [],
+    "variables": {},
+    "resources": [
+        {
+            "name": "appserviceplan8888",
+            "type": "Microsoft.Web/serverfarms",
+            "apiVersion": "2022-09-01",
+            "location": "[resourceGroup().location]",
+            "sku": {
+                "name": "F1",
+                "capacity": 1
+            },
+            "tags": {
+                "displayName": "appserviceplan8888"
+            },
+            "properties": {
+                "name": "appserviceplan8888"
+            }
+        },
+     {
+        "name": "kashwebapp777",
+        "type": "Microsoft.Web/sites",
+        "apiVersion": "2022-09-01",
+        "location": "[resourceGroup().location]",
+                "dependsOn": [
+            "[resourceId('Microsoft.Web/serverfarms', 'appserviceplan8888')]"
+        ],
+        "properties": {
+            "name": "kashwebapp777",
+            "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', 'appserviceplan8888')]"
+        }
+     },
+{
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2021-04-01",
+            "name": "LinkedTemplate",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                  "uri":"https://linkdedtemplatesa1212121.blob.core.windows.net/template/sqldatabase.json",
+                  "contentVersion": "1.0.0.0"
+         
+    },
+    "parametersLink": {
+        "uri": "https://linkdedtemplatesa1212121.blob.core.windows.net/parameters/parameters.json",
+        "contentVersion": "1.0.0.0"
+      }
+    }}
+     
+    ],
+    "outputs": {}
+}
